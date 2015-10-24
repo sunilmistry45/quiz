@@ -14,15 +14,18 @@ public class Parser {
     return file;
   }
   public String getContent() throws IOException {
+    if(!file || !file.exists()) return;// Verifying NPE and file availability
     FileInputStream i = new FileInputStream(file);
     String output = "";
     int data;
     while ((data = i.read()) > 0) {
       output += (char) data;
     }
+    i.close();// Closing the FileInputStream object
     return output;
   }
   public String getContentWithoutUnicode() throws IOException {
+    if(!file || !file.exists()) return;// Verifying NPE and file availability
     FileInputStream i = new FileInputStream(file);
     String output = "";
     int data;
@@ -31,12 +34,15 @@ public class Parser {
         output += (char) data;
       }
     }
+    i.close();// Closing the FileInputStream object
     return output;
   }
   public void saveContent(String content) throws IOException {
+    if(!file || !file.exists()) return;// Verifying NPE and file availability
     FileOutputStream o = new FileOutputStream(file);
     for (int i = 0; i < content.length(); i += 1) {
       o.write(content.charAt(i));
     }
+    o.close();// Closing the FileOutputStream object
   }
 }
